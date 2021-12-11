@@ -5,7 +5,7 @@ resource "google_dns_managed_zone" "portfolio" {
 
 }
 
-resource "google_dns_record_set" "api" {
+resource "google_dns_record_set" "portfolio" {
   name = google_dns_managed_zone.portfolio.dns_name
   type = "A"
   ttl  = 300
