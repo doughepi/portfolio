@@ -4,8 +4,6 @@ jobs:
   terraform:
     name: "Validate Terraform"
     runs-on: ubuntu-latest
-    needs:
-      - build
     env:
       PROJECT_ID: data-visitor-334805
       TF_BUCKET: cf7e3478-6c37-4d0f-910c-87e6bda48191
