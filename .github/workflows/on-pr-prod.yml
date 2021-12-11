@@ -1,33 +1,15 @@
 on:
   pull_request:
 jobs:
-  build:
-    name: "Build (Speculative)"
-    runs-on: ubuntu-latest
-    env:
-      PROJECT_ID: data-visitor-334805 
-      SERVICE_ACCOUNT: github-workflow@data-visitor-334805.iam.gserviceaccount.com
-      REPO_NAME: general
-      IMAGE_NAME: portfolio
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Get Commit Hash
-        id: commit_hash
-        shell: bash
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-    outputs:
-      image_name: ${{ env.IMAGE_NAME }}
-      image_tag: ${{ steps.commit_hash.outputs.sha_short }}
   terraform:
-    name: 'Terraform'
+    name: "Validate Terraform"
     runs-on: ubuntu-latest
     needs:
       - build
     env:
-      PROJECT_ID: data-visitor-334805 
-      TF_BUCKET: cf7e3478-6c37-4d0f-910c-87e6bda48191 
+      PROJECT_ID: data-visitor-334805
+      TF_BUCKET: cf7e3478-6c37-4d0f-910c-87e6bda48191
+      DEPLOY_BUCKET: b3f69dd1-9c32-43e9-9446-9e3567075f5f
       DNS_NAME: piper.codes
     steps:
       - name: Checkout
@@ -56,9 +38,8 @@ jobs:
         id: plan
         working-directory: ./infrastructure
         run: |
-          terraform plan -var "project_id=${{ env.PROJECT_ID }}" \
-          -var "image_name=${{ needs.build.outputs.image_name }}" -var "image_tag=${{ needs.build.outputs.image_tag }}" \
-          -var "dns_name=${{ env.DNS_NAME }}"
+          terraform plan -var "project_id=${{ env.PROJECT_ID }}" -var "dns_name=${{ env.DNS_NAME }}" \
+          -var "deploy_bucket=${{ env.DEPLOY_BUCKET }}"
         continue-on-error: true
       - name: Update Pull Request
         uses: actions/github-script@0.9.0

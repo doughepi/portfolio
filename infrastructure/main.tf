@@ -1,31 +1,21 @@
-resource "google_cloud_run_service" "portfolio" {
-  name     = "portfolio"
-  location = "us-central1"
-  project  = var.project_id
-  template {
-    spec {
-      containers {
-        image = "us-docker.pkg.dev/${var.project_id}/general/${var.image_name}:${var.image_tag}"
-      }
-    }
+resource "google_storage_bucket" "portfolio" {
+  name          = var.deploy_bucket
+  location      = "US"
+  force_destroy = true
+
+  uniform_bucket_level_access = true
+
+  website {
+    main_page_suffix = "index.html"
+    not_found_page   = "404.html"
   }
+
 }
 
-data "google_iam_policy" "portfolio" {
-  binding {
-    role = "roles/run.invoker"
-    members = [
-      "allUsers",
-    ]
-  }
-}
-
-resource "google_cloud_run_service_iam_policy" "portfolio" {
-  location = google_cloud_run_service.portfolio.location
-  project  = google_cloud_run_service.portfolio.project
-  service  = google_cloud_run_service.portfolio.name
-
-  policy_data = data.google_iam_policy.portfolio.policy_data
+resource "google_storage_bucket_iam_member" "portfolio" {
+  bucket = google_storage_bucket.portfolio.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
 }
 
 resource "google_compute_global_address" "portfolio" {
@@ -46,22 +36,10 @@ resource "google_compute_managed_ssl_certificate" "portfolio" {
 }
 
 
-resource "google_compute_region_network_endpoint_group" "portfolio" {
-  name                  = "portfolio"
-  project               = var.project_id
-  network_endpoint_type = "SERVERLESS"
-  region                = "us-central1"
-  cloud_run {
-    service = google_cloud_run_service.portfolio.name
-  }
-}
-
-resource "google_compute_backend_service" "portfolio" {
+resource "google_compute_backend_bucket" "portfolio" {
   name        = "portfolio"
-  project     = var.project_id
-  protocol    = "HTTP"
-  port_name   = "http"
-  timeout_sec = 30
+  description = "Static portfolio content."
+  bucket_name = google_storage_bucket.portfolio.name
   enable_cdn  = true
   cdn_policy {
     cache_mode                   = "CACHE_ALL_STATIC"
@@ -71,16 +49,12 @@ resource "google_compute_backend_service" "portfolio" {
     negative_caching             = true
     signed_url_cache_max_age_sec = 7200
   }
-
-  backend {
-    group = google_compute_region_network_endpoint_group.portfolio.id
-  }
 }
 
 resource "google_compute_url_map" "portfolio" {
   name            = "portfolio"
   project         = var.project_id
-  default_service = google_compute_backend_service.portfolio.id
+  default_service = google_compute_backend_bucket.portfolio.self_link
 }
 
 resource "google_compute_target_https_proxy" "portfolio" {
