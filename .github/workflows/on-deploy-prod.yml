@@ -58,4 +58,4 @@ jobs:
           export_default_credentials: true
       - name: Deploy to bucket
         run: |
-          gsutil rsync -avzrp build/ gs://${{ needs.infrastructure.outputs.deploy_bucket }}
+          gsutil rsync -r build/ gs://${{ needs.infrastructure.outputs.deploy_bucket }}
