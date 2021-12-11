@@ -5,7 +5,7 @@ resource "google_cloud_run_service" "portfolio" {
   template {
     spec {
       containers {
-        image = "us-central1-docker.pkg.dev/${var.project_id}/general/${var.image_name}:${var.image_tag}"
+        image = "us-docker.pkg.dev/${var.project_id}/general/${var.image_name}:${var.image_tag}"
       }
     }
   }
