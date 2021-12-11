@@ -33,17 +33,17 @@ resource "google_compute_global_address" "portfolio" {
   project = var.project_id
 }
 
-# resource "google_compute_managed_ssl_certificate" "portfolio" {
-#   name    = "portfolio"
-#   project = var.project_id
-#   managed {
-#     domains = [var.dns_name]
-#   }
+resource "google_compute_managed_ssl_certificate" "portfolio" {
+  name    = "portfolio"
+  project = var.project_id
+  managed {
+    domains = [var.dns_name]
+  }
 
-#   depends_on = [
-#     google_dns_record_set.portfolio
-#   ]
-# }
+  depends_on = [
+    google_dns_record_set.portfolio
+  ]
+}
 
 
 resource "google_compute_region_network_endpoint_group" "portfolio" {
@@ -88,7 +88,7 @@ resource "google_compute_target_https_proxy" "portfolio" {
   project = var.project_id
   url_map = google_compute_url_map.portfolio.id
   ssl_certificates = [
-    # google_compute_managed_ssl_certificate.portfolio.id
+    google_compute_managed_ssl_certificate.portfolio.id
   ]
 }
 
