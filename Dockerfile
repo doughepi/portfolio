@@ -1,8 +1,6 @@
 FROM node:17-alpine as builder
-
 WORKDIR /app/portfolio
 COPY . /app/portfolio
-
 RUN yarn
 RUN yarn build
 

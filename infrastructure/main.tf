@@ -1,5 +1,5 @@
-resource "google_cloud_run_service" "api" {
-  name     = "api"
+resource "google_cloud_run_service" "portfolio" {
+  name     = "portfolio"
   location = "us-central1"
   project  = var.project_id
   template {
@@ -11,7 +11,7 @@ resource "google_cloud_run_service" "api" {
   }
 }
 
-data "google_iam_policy" "api" {
+data "google_iam_policy" "portfolio" {
   binding {
     role = "roles/run.invoker"
     members = [
@@ -20,44 +20,44 @@ data "google_iam_policy" "api" {
   }
 }
 
-resource "google_cloud_run_service_iam_policy" "api" {
-  location = google_cloud_run_service.api.location
-  project  = google_cloud_run_service.api.project
-  service  = google_cloud_run_service.api.name
+resource "google_cloud_run_service_iam_policy" "portfolio" {
+  location = google_cloud_run_service.portfolio.location
+  project  = google_cloud_run_service.portfolio.project
+  service  = google_cloud_run_service.portfolio.name
 
-  policy_data = data.google_iam_policy.api.policy_data
+  policy_data = data.google_iam_policy.portfolio.policy_data
 }
 
-resource "google_compute_global_address" "api" {
-  name    = "api"
+resource "google_compute_global_address" "portfolio" {
+  name    = "portfolio"
   project = var.project_id
 }
 
-resource "google_compute_managed_ssl_certificate" "api" {
-  name    = "api"
+resource "google_compute_managed_ssl_certificate" "portfolio" {
+  name    = "portfolio"
   project = var.project_id
   managed {
     domains = [var.dns_name]
   }
 
   depends_on = [
-    google_dns_record_set.api
+    google_dns_record_set.portfolio
   ]
 }
 
 
-resource "google_compute_region_network_endpoint_group" "api" {
-  name                  = "api"
+resource "google_compute_region_network_endpoint_group" "portfolio" {
+  name                  = "portfolio"
   project               = var.project_id
   network_endpoint_type = "SERVERLESS"
   region                = "us-central1"
   cloud_run {
-    service = google_cloud_run_service.api.name
+    service = google_cloud_run_service.portfolio.name
   }
 }
 
-resource "google_compute_backend_service" "api" {
-  name        = "api"
+resource "google_compute_backend_service" "portfolio" {
+  name        = "portfolio"
   project     = var.project_id
   protocol    = "HTTP"
   port_name   = "http"
@@ -73,29 +73,29 @@ resource "google_compute_backend_service" "api" {
   }
 
   backend {
-    group = google_compute_region_network_endpoint_group.api.id
+    group = google_compute_region_network_endpoint_group.portfolio.id
   }
 }
 
-resource "google_compute_url_map" "api" {
-  name            = "api"
+resource "google_compute_url_map" "portfolio" {
+  name            = "portfolio"
   project         = var.project_id
-  default_service = google_compute_backend_service.api.id
+  default_service = google_compute_backend_service.portfolio.id
 }
 
-resource "google_compute_target_https_proxy" "api" {
-  name    = "api"
+resource "google_compute_target_https_proxy" "portfolio" {
+  name    = "portfolio"
   project = var.project_id
-  url_map = google_compute_url_map.api.id
+  url_map = google_compute_url_map.portfolio.id
   ssl_certificates = [
-    google_compute_managed_ssl_certificate.api.id
+    google_compute_managed_ssl_certificate.portfolio.id
   ]
 }
 
-resource "google_compute_global_forwarding_rule" "api" {
-  name       = "api"
+resource "google_compute_global_forwarding_rule" "portfolio" {
+  name       = "portfolio"
   project    = var.project_id
-  target     = google_compute_target_https_proxy.api.id
+  target     = google_compute_target_https_proxy.portfolio.id
   port_range = "443"
-  ip_address = google_compute_global_address.api.address
+  ip_address = google_compute_global_address.portfolio.address
 }
