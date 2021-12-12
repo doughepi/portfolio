@@ -16,6 +16,10 @@ const config = {
   organizationName: 'doughepi',
   projectName: 'portfolio',
 
+  plugins: [
+    'plugin-image-zoom'
+  ],
+
   presets: [
     [
       'classic',
