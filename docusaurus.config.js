@@ -29,6 +29,10 @@ const config = {
           showReadingTime: true,
           editUrl:
             'https://github.com/doughepi/portfolio/edit/main/blog/',
+          feedOptions: {
+            type: 'all',
+            copyright: `Copyright © ${new Date().getFullYear()} Piper Dougherty`,
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
