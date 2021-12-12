@@ -1,8 +1,16 @@
-# Website
+# Portfolio
+
+This is the main repository for my combination blog and portfolio site that is continuously deployed with Terraform and GitHub Workflows. 
+
+You can read more about the motivation behind creating this portfolio and blog on the first blog post that I wrote.
+
+[How I deployed this blog.](https://piper.codes/blog/how-I-deployed-this-blog?utm_source=github&utm_medium=readme&utm_campaign=github_readme)
+
+## Docusaurus
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-### Installation
+## Installation
 
 ```
 $ yarn
@@ -26,16 +34,4 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Deployment documentation is coming soon.
