@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# About Me
 
 👋🏻 Hey there, I'm Piper!
 

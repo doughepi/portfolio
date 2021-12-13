@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Piper Dougherty',
+  title: "Piper Dougherty",
   tagline: '🙋‍♂️Cloud Engineer at General Mills, building the next generation of hybrid-cloud infrastructure.',
   url: 'https://piper.codes',
   baseUrl: '/',
@@ -53,37 +53,23 @@ const config = {
     ({
       navbar: {
         title: 'Piper Dougherty',
-        // logo: {
-        //   alt: 'My Site Logo',
-        //   src: 'img/logo.svg',
-        // },
+        logo: {
+          alt: 'A picture of a laptop computer.',
+          src: 'img/laptop.png',
+        },
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'about-me',
             position: 'left',
             label: 'About Me',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
-          // {
-          //   href: 'https://github.com/facebook/docusaurus',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
         ],
       },
       footer: {
         style: 'dark',
         links: [
-          // {
-          //   title: 'Docs',
-          //   items: [
-          //     {
-          //       label: 'Tutorial',
-          //       to: '/docs/intro',
-          //     },
-          //   ],
-          // },
           {
             title: 'Social Media',
             items: [
@@ -91,14 +77,6 @@ const config = {
                 label: 'LinkedIn',
                 href: 'https://www.linkedin.com/in/doughepi/',
               },
-              // {
-              //   label: 'Discord',
-              //   href: 'https://discordapp.com/invite/docusaurus',
-              // },
-              // {
-              //   label: 'Twitter',
-              //   href: 'https://twitter.com/docusaurus',
-              // },
             ],
           },
           {

@@ -29,7 +29,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`${siteConfig.title}`}
       description="🙋‍♂️Cloud Engineer at General Mills, building the next generation of hybrid-cloud infrastructure.">
       <HomepageHeader />
       <main>

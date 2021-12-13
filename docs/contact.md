@@ -1,15 +1,7 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 ---
 
-# Contact Information
+# Contact
 
-You can contact me at the following locations.
-
-## Email
-
-I'm available at [doughertypiper@gmail.com](mailto:doughertypiper@gmail.com).
-
-## LinkedIn
-
-Send me a message through my [LinkedIn profile](https://www.linkedin.com/in/doughepi/).
+Feel free to send me an email at [doughertypiper@gmail.com](mailto:doughertypiper@gmail.com). I'm also available by message on [LinkedIn](https://www.linkedin.com/in/doughepi/).
