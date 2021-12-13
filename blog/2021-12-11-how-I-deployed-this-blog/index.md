@@ -142,7 +142,7 @@ I put the Terraform in an `infrastructure/` folder in the root of my [blog's rep
 I also had to create a few things manually.
 
 - The Google Cloud Platform project.
-- A Google Cloud Storage Bucket mean to store [Terraform state](https://www.terraform.io/docs/language/state/index.html).
+- A Google Cloud Storage Bucket meant to store [Terraform state](https://www.terraform.io/docs/language/state/index.html).
 
 ### Add GitHub Workflows
 
