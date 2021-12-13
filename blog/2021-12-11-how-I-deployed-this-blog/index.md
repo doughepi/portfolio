@@ -172,7 +172,7 @@ I generated this manually by creating a Service Account in the Google Cloud Cons
 
 ![Google Cloud Console Service Account keys.](img/google-cloud-console-key.png)
 
-Once the key is set on the GitHub repository, I can use the `google-GitHub-actions/setup-gcloud` action within the Github Workflow to activate the Service Account.
+Once the key is set on the GitHub repository, I can use the `google-github-actions/setup-gcloud` action within the Github Workflow to activate the Service Account.
 
 ```yml title='on-pr-prod.yml'
 
