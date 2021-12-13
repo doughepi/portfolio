@@ -156,8 +156,8 @@ On pull request to the `main` branch.
 
 On the completion of the pull request and merge to `main`.
 
-1. Compilation of the Docusaurus instance into static resources.
-2. Deployment of the Terraform to create the infrastructure.
+1. Compile of the Docusaurus instance into static resources.
+2. Deploy the Terraform to create the infrastructure.
 3. Upload static resources to the Google Cloud Storage bucket.
 
 I put these workflows in the special `.github/workflows` folder of my [blog's repository](https://github.com/doughepi/portfolio/tree/main/.github/workflows).
