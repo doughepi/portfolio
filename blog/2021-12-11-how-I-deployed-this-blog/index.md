@@ -1,11 +1,12 @@
 ---
 slug: how-I-deployed-this-blog
 title: How I deployed this blog.
+description: Deploying my Jamstack Docusaurus portfolio and blog with Terraform and Github Workflows.
 authors: [doughepi]
-tags: [gcp, devops, terraform, github, cicd]
+tags: [gcp, devops, terraform, github, cicd, jamstack]
 ---
 
-Deploying my Docusaurus portfolio and blog with Terraform and Github Workflows.
+Deploying my Jamstack Docusaurus portfolio and blog with Terraform and Github Workflows.
 
 <!--truncate-->
 
