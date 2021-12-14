@@ -137,6 +137,10 @@ Docusaurus blogs compile to static pages, and Google Cloud supports serving stat
 
 I'm not _totally_ minimizing my costs. I chose to use a multi-region bucket instead of a single region. I also configured Google Cloud CDN to allow my static content to be cached at Google's points of presence. This probably isn't necessary at my scale, but I thought it would be cool to try out. I suppose if you're doing this yourself, you can choose what you want to be enabled.
 
+:::warning
+It's worth noting that I'm only able to use a Google Cloud Storage Bucket because Docusaurus has SSG (static site generation). JavaScript libraries like React require a solve for the deep linking problem. In those instances, a Cloud Run instance—where the app is deployed as a container that includes Nginx—is a better option.
+:::
+
 I put the Terraform in an `infrastructure/` folder in the root of my [blog's repository](https://github.com/doughepi/portfolio/tree/main/infrastructure).
 
 I also had to create a few things manually.
