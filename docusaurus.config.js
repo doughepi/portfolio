@@ -91,6 +91,10 @@ const config = {
                 label: 'LinkedIn',
                 href: 'https://www.linkedin.com/in/doughepi/',
               },
+              {
+                label: 'Instagram',
+                href: 'https://www.instagram.com/doughepi/',
+              }
               // {
               //   label: 'Discord',
               //   href: 'https://discordapp.com/invite/docusaurus',
